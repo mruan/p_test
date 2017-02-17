@@ -13,6 +13,9 @@ link_directories(/usr/local/lib/)
 add_executable(ut02 ut02.c)
 target_link_libraries(ut02 paillier gmp)
 
+add_executable(ut03 ut03.c)
+target_link_libraries(ut03 paillier gmp)
+
 add_executable(ut04 ut04.c)
 #if (GMP_FOUND)
 #  include_directories(${BZIP_INCLUDE_DIRS})
