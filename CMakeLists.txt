@@ -5,13 +5,13 @@ project (paillier_test)
 #find_package(GMP REQUIRED)
 
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
-set(CMAKE_BUILD_TYPE DEBUG)
+#set(CMAKE_BUILD_TYPE DEBUG)
 
 include_directories(/usr/local/include/)
 link_directories(/usr/local/lib/)
 
-add_executable(test_01 test_01.c)
-target_link_libraries(test_01 paillier gmp)
+add_executable(ut02 ut02.c)
+target_link_libraries(ut02 paillier gmp)
 
 #if (GMP_FOUND)
 #  include_directories(${BZIP_INCLUDE_DIRS})
