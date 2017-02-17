@@ -15,16 +15,18 @@ int test_conversion(long int a)
   printf("Conversion test for %ld\n", a);
   unsigned long int b = a;
 
-  paillier_plaintext_t* m_b = paillier_plaintext_from_bytes(&b, sizeof(b));
-
+  //  paillier_plaintext_t* m_b = paillier_plaintext_from_bytes(&b, sizeof(b));
+  paillier_plaintext_t* m_b = paillier_plaintext_from_bytes(&a, sizeof(a));
+  
   void* byte_array = paillier_plaintext_to_bytes(sizeof(unsigned long int), m_b);
 
-  unsigned long int c = *((unsigned long int*) byte_array);
-  long int d = (long int) c;
-
+  //  unsigned long int c = *((unsigned long int*) byte_array);
+  //  long int d = (long int) c;
+  long int d = *((long int*) byte_array);
+  
   printf("a=%ld\n", a);
-  printf("b=%lu\n", b);
-  printf("c=%lu\n", c);
+  //  printf("b=%lu\n", b);
+  //  printf("c=%lu\n", c);
   printf("d=%ld\n", d);
 
   free(byte_array);
