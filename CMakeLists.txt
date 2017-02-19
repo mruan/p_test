@@ -29,6 +29,10 @@ target_link_libraries(ut07 paillier gmp)
 
 add_executable(eg01 eg01.c)
 target_link_libraries(eg01 paillier gmp)
+
+add_executable(ut08 ut08.c)
+target_link_libraries(ut08 paillier gmp)
+
 #if (GMP_FOUND)
 #  include_directories(${BZIP_INCLUDE_DIRS})
 #  target_link_libraries(test_01 paillier ${GMP_LIBRARY})
