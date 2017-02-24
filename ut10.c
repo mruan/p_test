@@ -41,7 +41,7 @@ int test_comp(long int a,
 
   // Decrypt the ciphertext (sum)
   paillier_plaintext_t* m_d1 = paillier_dec(NULL, pub, prv, c_d1);
-  gmp_printf("Decrypted d1: %Zx\n", m_d1);
+  gmp_printf("Decrypted d1: \n%Zx\n", m_d1);
 
   // Multiply the difference
   paillier_exp(pub, c_d2, c_d1, m_c);
@@ -49,8 +49,18 @@ int test_comp(long int a,
 
   // Decrypt the ciphertext (sum)
   paillier_plaintext_t* m_d2 = paillier_dec(NULL, pub, prv, c_d2);
-  gmp_printf("Decrypted d2: %Zx\n", m_d2);
+  gmp_printf("Decrypted d2: \n%Zx\n", m_d2);
 
+  size_t nBytes = 0;
+  unsigned char* bytes = mpz_export(0, &nBytes, 1, 1, 0, 0, m_d2->m);
+  //paillier_plaintext_to_bytes(nBytes, m_d2);
+
+  for (int i=0; i< nBytes; ++i)
+    {
+      printf("%2x", bytes[i]);
+    }
+  printf("\n");
+  
   paillier_freeplaintext(m_a);
   paillier_freeplaintext(m_b); 
   paillier_freeplaintext(m_c); 
@@ -60,7 +70,7 @@ int test_comp(long int a,
   paillier_freeciphertext(c_d2);
   paillier_freeciphertext(c_a);
   paillier_freeciphertext(c_b);
-
+  free(bytes);
   return 0;
 }
 
@@ -74,8 +84,9 @@ int main()
   paillier_prvkey_t* secKey;
   paillier_keygen(n, &pubKey, &secKey, paillier_get_rand_devurandom);
 
-  test_comp(15, -5, 23, pubKey, secKey);
-  
+  test_comp(-152, 5, 23, pubKey, secKey);
+  //  test_comp(0, -2, 128, pubKey, secKey);
+    
   paillier_freepubkey(pubKey);
   paillier_freeprvkey(secKey);
 }
