@@ -27,8 +27,8 @@ target_link_libraries(ut06 paillier gmp)
 add_executable(ut07 ut07.c)
 target_link_libraries(ut07 paillier gmp)
 
-add_executable(eg01 eg01.c)
-target_link_libraries(eg01 paillier gmp)
+#add_executable(eg01 eg01.c)
+#target_link_libraries(eg01 paillier gmp)
 
 add_executable(ut08 ut08.c)
 target_link_libraries(ut08 paillier gmp)

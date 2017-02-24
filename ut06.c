@@ -3,6 +3,9 @@
 #include <paillier.h>
 
 
+#define NUM_1 -5
+#define NUM_2 1
+
 int main(int argc, char *argv[])
 {
     // Security parameter (number of bits of the modulus)
@@ -15,17 +18,17 @@ int main(int argc, char *argv[])
 
     // Plaintexts initialization
     paillier_plaintext_t* m1;
-    m1 = paillier_plaintext_from_ui(12345);
+    m1 = paillier_plaintext_from_ui(NUM_1);
     paillier_plaintext_t* m2;
-    m2 = paillier_plaintext_from_ui(54321);
-    gmp_printf("Plaintexts: m1=%Zd\n, m2=%Zd\n", m1, m2);
+    m2 = paillier_plaintext_from_ui(NUM_2);
+    gmp_printf("Plaintexts: \nm1 = %Zd\nm2 = %Zd\n", m1, m2);
 
     // Encrypt the messages
     paillier_ciphertext_t* ctxt1;
     ctxt1 = paillier_enc(NULL, pubKey, m1, paillier_get_rand_devurandom);
     paillier_ciphertext_t* ctxt2;
     ctxt2 = paillier_enc(NULL, pubKey, m2, paillier_get_rand_devurandom);
-    gmp_printf("Ciphertexts: ctxt1=%Zd, ctxt2=%Zd\n", ctxt1, ctxt2);
+    gmp_printf("Ciphertexts: \nctxt1 = %Zd\nctxt2 = %Zd\n", ctxt1, ctxt2);
 
     // Initialize the ciphertext that will hold the sum with an encryption of zero
     paillier_ciphertext_t* encrypted_sum = paillier_create_enc_zero();
