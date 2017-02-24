@@ -1,4 +1,7 @@
+/*
+  Test the sum with possible negative numbers
 
+ */
 #include <gmp.h>
 #include <paillier.h>
 
@@ -40,7 +43,7 @@ int main(int argc, char *argv[])
     // Decrypt the ciphertext (sum)
     paillier_plaintext_t* dec;
     dec = paillier_dec(NULL, pubKey, secKey, encrypted_sum);
-    gmp_printf("Decrypted: %Zd\n", dec);
+    gmp_printf("Decrypted: %Zx or (%Zd)\n", dec, dec);
 
     // Cleaning up
     paillier_freepubkey(pubKey);
