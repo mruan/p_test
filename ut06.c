@@ -7,7 +7,7 @@
 
 
 #define NUM_1 -5
-#define NUM_2 1
+#define NUM_2 -1
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     m1 = paillier_plaintext_from_ui(NUM_1);
     paillier_plaintext_t* m2;
     m2 = paillier_plaintext_from_ui(NUM_2);
-    gmp_printf("Plaintexts: \nm1 = %Zd\nm2 = %Zd\n", m1, m2);
+    gmp_printf("Plaintexts: \nm1 = %Zx\nm2 = %Zx\n", m1, m2);
 
     // Encrypt the messages
     paillier_ciphertext_t* ctxt1;
