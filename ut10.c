@@ -60,6 +60,20 @@ int test_comp(long int a,
       printf("%2x", bytes[i]);
     }
   printf("\n");
+
+  //  unsigned long int e = *((unsigned long int *) &bytes[nBytes-sizeof(a)]);
+  //  unsigned long int e = *((unsigned long int *) bytes);
+  // assemble back to long int: (assume nBytes > size(a))
+  long int e = 0;
+  //  assert( nBytes > sizeof(a));
+  //  for(int i=nBytes-1; i >= nBytes-sizeof(a); --i)
+  for(int i= nBytes-sizeof(a); i < nBytes; i++)
+  {
+      e = (e << 8) | bytes[i];
+  }
+  printf("e = %lx or (%ld)\n", e, e);
+  long int f = *((long int *) &bytes[nBytes-sizeof(a)]);
+  printf("f = %lx or (%ld)\n", f, f);
   
   paillier_freeplaintext(m_a);
   paillier_freeplaintext(m_b); 
@@ -85,7 +99,7 @@ int main()
   paillier_keygen(n, &pubKey, &secKey, paillier_get_rand_devurandom);
 
   test_comp(-152, 5, 23, pubKey, secKey);
-  //  test_comp(0, -2, 128, pubKey, secKey);
+  test_comp(0, -2, 128, pubKey, secKey);
     
   paillier_freepubkey(pubKey);
   paillier_freeprvkey(secKey);
