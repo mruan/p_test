@@ -7,8 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <gmp.h>
-#include <paillier.h>
+//#include <gmp.h>
+//#include <paillier.h>
+#include "utils.h"
 
 int test_comp(long int a,
 	      long int b,
@@ -51,28 +52,7 @@ int test_comp(long int a,
   paillier_plaintext_t* m_d2 = paillier_dec(NULL, pub, prv, c_d2);
   gmp_printf("Decrypted d2: \n%Zx\n", m_d2);
 
-  size_t nBytes = 0;
-  unsigned char* bytes = mpz_export(0, &nBytes, 1, 1, 0, 0, m_d2->m);
-  //paillier_plaintext_to_bytes(nBytes, m_d2);
-
-  for (int i=0; i< nBytes; ++i)
-    {
-      printf("%2x", bytes[i]);
-    }
-  printf("\n");
-
-  //  unsigned long int e = *((unsigned long int *) &bytes[nBytes-sizeof(a)]);
-  //  unsigned long int e = *((unsigned long int *) bytes);
-  // assemble back to long int: (assume nBytes > size(a))
-  long int e = 0;
-  //  assert( nBytes > sizeof(a));
-  //  for(int i=nBytes-1; i >= nBytes-sizeof(a); --i)
-  for(int i= nBytes-sizeof(a); i < nBytes; i++)
-  {
-      e = (e << 8) | bytes[i];
-  }
-  printf("e = %lx or (%ld)\n", e, e);
-  long int f = *((long int *) &bytes[nBytes-sizeof(a)]);
+  long int f = plaintext_to_long(m_d2);
   printf("f = %lx or (%ld)\n", f, f);
   
   paillier_freeplaintext(m_a);
@@ -84,7 +64,7 @@ int test_comp(long int a,
   paillier_freeciphertext(c_d2);
   paillier_freeciphertext(c_a);
   paillier_freeciphertext(c_b);
-  free(bytes);
+  //  free(bytes);
   return 0;
 }
 

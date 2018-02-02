@@ -7,8 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <gmp.h>
-#include <paillier.h>
+//#include <gmp.h>
+//#include <paillier.h>
+#include "utils.h"
 
 int test_arithmetic(unsigned long int a,
 		    unsigned long int b,
@@ -16,8 +17,10 @@ int test_arithmetic(unsigned long int a,
 		    paillier_pubkey_t* pub,
 		    paillier_prvkey_t* prv)
 {
-  printf("a = %ld\nb = %ld\n", a, b);
-  printf("c = %ld\nc(a+b) = %ld\n", c, c*(a+b));
+  printf("a = %ld(%lu)\n", a, a);
+  printf("b = %ld(%lu)\n", b, b);
+  printf("c = %ld(%lu)\n", c, c);
+  printf("c(a+b) = %ld(%lu)\n",c*(a+b),c*(a+b));
 
   // convert a and b to plaintext
   paillier_plaintext_t* m_a = paillier_plaintext_from_ui(a);
@@ -48,14 +51,7 @@ int test_arithmetic(unsigned long int a,
 
   gmp_printf("c_res -> m_res: %Zd\n", m_res);
 
-  /*
-  void* bytes = paillier_plaintext_to_bytes(sizeof(int), m_res);
-  int res = *((int*) bytes);
-  free(bytes);
-  */
-  char temp_str[128];
-  gmp_sprintf(temp_str, "%Zd", m_res);
-  long int res = atoi(temp_str);
+  long int res = plaintext_to_long(m_res);
   printf("res = %ld\n", res);
 
   paillier_freeplaintext(m_a);
@@ -70,7 +66,7 @@ int test_arithmetic(unsigned long int a,
 
 int main()
 {
-  const int key_len = 64;
+  const int key_len = 256;
   paillier_pubkey_t* pub = NULL;
   paillier_prvkey_t* prv = NULL;
 
@@ -84,8 +80,9 @@ int main()
   printf("Public key in hex: %s\n", pub_str);
   printf("Private key in hex: %s\n", prv_str);
  
-  test_arithmetic(12345, 54321, 2,  pub, prv);  
-
+  test_arithmetic(12345, 54321, 2,  pub, prv); 
+  test_arithmetic(12345, 54321, -2,  pub, prv); 
+ 
   free(pub_str);
   free(prv_str);
   

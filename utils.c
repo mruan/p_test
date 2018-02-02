@@ -12,7 +12,8 @@ long plaintext_to_long(paillier_plaintext_t* m)
   size_t i = 0;
   //  assert( nBytes > sizeof(a));
   //  for(int i=nBytes-1; i >= nBytes-sizeof(a); --i)
-  for(i= nBytes-sizeof(long); i < nBytes; i++)
+  //  for(i= nBytes-sizeof(long); i < nBytes; i++)
+  for(i=0; i < nBytes; i++)
   {
       e = (e << 8) | bytes[i];
   }

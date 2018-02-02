@@ -61,7 +61,7 @@ int main()
   paillier_keygen(n, &pubKey, &secKey, paillier_get_rand_devurandom);
 
 // (a, c, pubkey, seckey)
-//  test_prod(5, 23, pubKey, secKey);
+  test_prod(5, 23, pubKey, secKey);
   test_prod(-5, 23, pubKey, secKey);
     
   paillier_freepubkey(pubKey);

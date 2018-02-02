@@ -30,13 +30,13 @@ target_link_libraries(ut07 paillier gmp)
 #add_executable(eg01 eg01.c)
 #target_link_libraries(eg01 paillier gmp)
 
-add_executable(ut08 ut08.c)
+add_executable(ut08 ut08.c utils.c)
 target_link_libraries(ut08 paillier gmp)
 
 add_executable(ut09 ut09.c)
 target_link_libraries(ut09 paillier gmp)
 
-add_executable(ut10 ut10.c)
+add_executable(ut10 ut10.c utils.c)
 target_link_libraries(ut10 paillier gmp)
 
 add_executable(ut11 ut11.c utils.c)
